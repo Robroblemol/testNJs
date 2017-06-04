@@ -15,10 +15,12 @@ function init(route,handle) {//recive el parámetro route y el manejador
     var pathname = url.parse(request.url).pathname;//obtenemos la url
     console.log("Peticion para "+pathname+" recibida.");
 
-    route (handle,pathname);//pasamos el manejador y la ruta
+    //route (handle,pathname);//pasamos el manejador y la ruta
 
     response.writeHead(200,{"Content-Type":"text/html"});
-    response.write("Hola Roberto estas aprendiendo");
+    var content = route(handle,pathname);
+    response.write(content);//para responder desde el manejador
+    //response.write("Hola Roberto estas aprendiendo");
     response.end();
   }
 
