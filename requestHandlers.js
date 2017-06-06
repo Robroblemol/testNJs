@@ -1,13 +1,12 @@
-function start() {
+var exec = require("child_process").exec;
+function start(response) {
   console.log("manipulador de peticion 'start' se ha llamdado");
-    function sleep(milliSeconds) {
-      //obtenemos hora actual
-      var startTime = new Date().getTime();
-      //ocupamos la cpu inutilmente
-      while (new Date().getTime()<startTime+milliSeconds);
-    }
-  sleep(10000);
-  return "Hola inicio";//repornar directamente desde el nanejador
+  exec("ls -lah",function (error,stdout,stderr) {
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.write(stdout);
+    response.end();
+  });
+  //return "Hola inicio";//repornar directamente desde el nanejador
 }
 function up() {
   console.log("manipulador de peticion 'up' se ha llamdado");
