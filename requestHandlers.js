@@ -1,5 +1,6 @@
-var exec = require("child_process").exec;
-function start(response) {
+var querystring = require("querystring");
+//var exec = require("child_process").exec;
+function start(response,postData) {
   console.log("manipulador de peticion 'start' se ha llamdado");
   var body = '<html>'+
   '<head>'+
@@ -20,10 +21,11 @@ function start(response) {
 
   //return "Hola inicio";//repornar directamente desde el nanejador
 }
-function up(response) {
+function up(response,dataPost) {
   console.log("manipulador de peticion 'up' se ha llamdado");
   response.writeHead(200, {"Content-Type": "text/html"});
-  response.write("Hola Subir");
+  response.write("Enviaste esto: "+
+  querystring.parse(dataPost)["text"]);
   response.end();
 }
 

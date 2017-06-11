@@ -12,10 +12,22 @@ var url = require("url");//para encontrar rutas
 // }).listen(8888);
 function init(route,handle) {//recive el parámetro route y el manejador
   function onRequest(request,response) {
+    var dataPost = "";
     var pathname = url.parse(request.url).pathname;//obtenemos la url
     console.log("Peticion para "+pathname+" recibida.");
 
-    route (handle,pathname,response);//pasamos el manejador y la ruta
+    request.setEncoding("utf8");
+
+    request.addListener("data",function(trozoPost){
+      dataPost += trozoPost;
+      console.log("Recibido trozo POST '" + trozoPost + "'.");
+    });
+
+    request.addListener("end",function(){
+      route (handle,pathname,response,dataPost);//pasamos el manejador y la ruta
+      //y todos los trozos de los datos
+
+    });
 
   }
 

@@ -1,7 +1,7 @@
-function route(handle, pathname,response) {// agregamos el manejador
+function route(handle, pathname,response,postData) {// agregamos el manejadory peticion post
   console.log("routeando peticion para "+pathname);
   if (typeof handle[pathname] === 'function'){//aqui evaluamos si lo recivido es una function
-    handle [pathname](response);//llamamos la respuesta desde el manejador
+    handle [pathname](response,postData);//llamamos la respuesta desde el manejador y enviamos la peticion post
     //return handle[pathname]();//si ens asi devolvemos el manejador.loquesea
   }
   else{
