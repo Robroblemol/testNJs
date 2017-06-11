@@ -8,9 +8,11 @@ function start(response) {
   });
   //return "Hola inicio";//repornar directamente desde el nanejador
 }
-function up() {
+function up(response) {
   console.log("manipulador de peticion 'up' se ha llamdado");
-  return "Hola subir";//repornar directamente desde el nanejador
+  response.writeHead(200, {"Content-Type": "text/html"});
+  response.write("Hola Subir");
+  response.end();
 }
 
 exports.start = start ;
